@@ -1,0 +1,52 @@
+* {
+  all: unset;
+  font-weight: bold;
+}
+
+.bar {
+  transition-duration: 0.5s;
+  background-color: rgba(29, 32, 47, 0.5);
+  color: #ffffff;
+  padding: 5px;
+  border: 2px solid #ccebff;
+  border-radius: 13px;
+}
+
+.logo {
+  font-size: 25px;
+  margin-left: -5px; /* used to center icon */
+}
+
+.workspaces {
+  border-radius: 10px;
+  padding: 3px;
+  background-color: #1a1b26;
+  font-size: 25px;
+}
+
+.workspaces button:first-child {
+  padding-left: 7px;
+  padding-right: 7px;
+  background-color: #24283b;
+  border-radius: 8px;
+}
+
+.network {
+  border-radius: 10px;
+  padding: 8px;
+  background-color: #1a1b26;
+  font-size: 16px;
+}
+
+/* used to center wifi icon */
+.network box:first-child {
+  margin-left: -3px;
+}
+
+.clock {
+  margin-top: 5px;
+  border-radius: 10px;
+  padding: 8px;
+  background-color: #1a1b26;
+  font-size: 15px;
+}
