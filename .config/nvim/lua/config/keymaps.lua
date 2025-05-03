@@ -1,114 +1,166 @@
-local keymap = vim.keymap
-local opts = { noremap = true, silent = true }
+---------------------------------------------------------------------
+--  ___                     _            _   _
+-- |_ _|_ __  _ __  ___ _ _| |_ __ _ _ _| |_| |
+--  | || '  \| '_ \/ _ \ '_|  _/ _` | ' \  _|_|
+-- |___|_|_|_| .__/\___/_|  \__\__,_|_||_\__(_)
+--           |_|
+--
+-- These keymaps have been made with an Azerty (french)
+-- keyboard layout in mind. Therefore, some remaps may not be
+-- appropriate for other layouts
+---------------------------------------------------------------------
+
+
+
+local map = vim.keymap.set
+-- Set spacebar as leader key
+vim.g.mapleader = " "
+
+-------------------
+--  _
+-- | |____ __
+-- | (_-< '_ \
+-- |_/__/ .__/
+--      |_|
+-------------------
+
+map("n", "D", vim.lsp.buf.definition, { desc = "Go to definition" })
+map("n", "?", vim.lsp.buf.hover, { desc = "Read symbols's documentation" })
+map("n", ";", vim.lsp.buf.code_action, { desc = "Open code actions" })
+map("n", "<f2>", vim.lsp.buf.rename, { desc = "Rename symbol" })
+map("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float(0, {scope = \"line\"})<CR>", { desc = "Display full lsp diagnostic" })
+map("n", "<leader>b", "<cmd>Neotree filesystem reveal left<CR>", { desc = "Open file tree" })
+
+
+--------------------------------------------------------------------------
+--  ___          _        _     _  _          _           _   _
+-- | _ \_ _ ___ (_)___ __| |_  | \| |__ ___ _(_)__ _ __ _| |_(_)___ _ _
+-- |  _/ '_/ _ \| / -_) _|  _| | .` / _` \ V / / _` / _` |  _| / _ \ ' \
+-- |_| |_| \___// \___\__|\__| |_|\_\__,_|\_/|_\__, \__,_|\__|_\___/_||_|
+--            |__/                             |___/
+--------------------------------------------------------------------------
+
 local telescope = require("telescope.builtin")
 local harpoon = require("harpoon")
 harpoon:setup()
 
--- Remap "go to line begin" and "go to line end"
-keymap.set("n", "m", "$", { noremap = true, silent = true })
+map("n", "<leader>f", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>",
+    { desc = "Search file in project" })
+map("n", "<leader>g", telescope.live_grep, { desc = "Grep in project" })
+map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<CR>",
+    { desc = "Grep in current buffer" })
+map("n", "!", '<cmd>lua require("telescope.builtin").lsp_references()<CR>', { desc = "Find element references" })
 
--- Switched numbers and symbols to avoid pressing shift
-keymap.set("n", "&", "1")
-keymap.set("n", "é", "2")
-keymap.set("n", "\"", "3")
-keymap.set("n", "'", "4")
-keymap.set("n", "(", "5")
-keymap.set("n", "-", "6")
-keymap.set("n", "è", "7")
-keymap.set("n", "_", "8")
-keymap.set("n", "ç", "9")
-keymap.set("n", "à", "0")
-keymap.set("n", "1", "&")
-keymap.set("n", "2", "é")
-keymap.set("n", "3", "\"")
-keymap.set("n", "4", "'")
-keymap.set("n", "5", "(")
-keymap.set("n", "7", "è")
-keymap.set("n", "7", "_")
-keymap.set("n", "9", "ç")
-keymap.set("n", "0", "à")
+map("n", "<leader>a", function() harpoon:list():add() end, { desc = "Pin opened buffer" })
+map("n", "<leader>l", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "List pinned buffers" })
 
--- "shift + d" to go to definition
-keymap.set("n", "D", vim.lsp.buf.definition, {})
--- "?" to read hovered element's doc comment
-keymap.set("n", "?", vim.lsp.buf.hover, {})
--- ";" to open code actions
-keymap.set("n", ";", vim.lsp.buf.code_action, {})
--- "f2" to rename symbol
-keymap.set("n", "<f2>", vim.lsp.buf.rename, {})
--- "leader + e" to show lsp error
-keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float(0, {scope = \"line\"})<CR>")
+map("n", "<M-&>", function() harpoon:list():select(1) end, { desc = "Open pinned buffer 1" })
+map("n", "<M-é>", function() harpoon:list():select(2) end, { desc = "Open pinned buffer 2" })
+map("n", "<M-\">", function() harpoon:list():select(3) end, { desc = "Open pinned buffer 3" })
+map("n", "<M-'>", function() harpoon:list():select(4) end, { desc = "Open pinned buffer 4" })
+map("n", "<M-(>", function() harpoon:list():select(5) end, { desc = "Open pinned buffer 5" })
+map("n", "<M-->", function() harpoon:list():select(6) end, { desc = "Open pinned buffer 6" })
+map("n", "<M-è>", function() harpoon:list():select(7) end, { desc = "Open pinned buffer 7" })
+map("n", "<M-_>", function() harpoon:list():select(8) end, { desc = "Open pinned buffer 8" })
 
--- "leader + b" to open file tree
-keymap.set("n", "<leader>b", "<cmd>Neotree filesystem reveal left<CR>")
 
--- `leader + f` to grep current project (/!\ requires ripgrep /!\)
--- `leader + p` to search for files
--- `Ctrl + f` to grep in current buffer
-keymap.set("n", "<leader>f", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<CR>")
-keymap.set("n", "<leader>g", telescope.live_grep)
-keymap.set("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<CR>")
-keymap.set("n", "!", '<cmd>lua require("telescope.builtin").lsp_references()<CR>')
+-------------------------------------------------------------------------
+--  ___       __  __           _  _          _           _   _          
+-- | _ )_  _ / _|/ _|___ _ _  | \| |__ ___ _(_)__ _ __ _| |_(_)___ _ _  
+-- | _ | || |  _|  _/ -_| '_| | .` / _` \ V | / _` / _` |  _| / _ | ' \ 
+-- |___/\_,_|_| |_| \___|_|   |_|\_\__,_|\_/|_\__, \__,_|\__|_\___|_||_|
+--                                            |___/                     
+-------------------------------------------------------------------------
 
--- "+" to increment and "-" to decrement
-keymap.set("n", "+", "<C-a>")
-keymap.set("n", "6", "<C-x>")
+map({ 'n', 'v' }, "<C-j>", "5j", { desc = "Go five lines down" })
+map({ 'n', 'v' }, "<C-k>", "5k", { desc = "Go five lines up" })
 
--- "Ctrl + a" to select all text
-keymap.set("n", "<C-a>", "gg<S-v>G")
+map({ 'n', 'v' }, '<C-h>', '{', { desc = "Go to previous paragraph" })
+map({ 'n', 'v' }, '<C-l>', '}', { desc = "Go to next paragraph" })
 
--- "Leader + s" to save file
-keymap.set("n", "<leader>s", "<cmd>w<Return>")
+map({ 'n', 'v' }, "<C-d>", "<C-d>zz", { desc = "Center content after 'Ctrl + d'" })
+map({ 'n', 'v' }, "<C-u>", "<C-u>zz", { desc = "Center content after 'Ctrl + u'" })
+map("n", "n", "nzz", { desc = "Center content after going to next find" })
+map("n", "N", "Nzz", { desc = "Center content after going to previous find" })
+map({ 'n', 'v' }, "G", "Gzz", { desc = "Center content after going to bottom of the buffer" })
 
--- "Leader + q" to close buffer
-keymap.set("n", "<leader>q", "<cmd>q<Return>")
+map({ 'n', 'v' }, "<M-h>", "^", { desc = "Go the beginning of the line" })
+map({ 'n', 'v' }, "<M-l>", "$", { desc = "Go the end of the line" })
 
--- "Crtl + k" to go five lines up
--- "Ctrl + j" to go five lines down
-keymap.set("n", "<C-k>", "5k")
-keymap.set("n", "<C-j>", "5j")
+map("n", "<leader>s", "<cmd>SymbolsOutline<CR>", { desc = "Open symbols tree" })
 
--- "alt + up" to move line up and "alt + down" to move line down
-keymap.set("n", "<M-k>", "<cmd>m .-2<CR>==")
-keymap.set("n", "<M-Up>", "<cmd>m .-2<CR>==")
-keymap.set("n", "<M-j>", "<cmd>m .+1<CR>==")
-keymap.set("n", "<M-Down>", "<cmd>m .+1<CR>==")
+local flash = require("flash");
+map({ "n", "x", "o" }, "<leader>z", function() flash.jump() end, { desc = "Enter Flash mode" })
+map({ "n", "x", "o" }, "<leader>Z", function() flash.treesitter() end, { desc = "Enter Flash Treesitter mode" })
 
--- "alt + shift + up" to duplicate line and "alt + shift + down" to duplicate line and go to the duplicated line
-keymap.set("n", "<M-S-k>", "<cmd>t.0<Return>k=j")
-keymap.set("n", "<M-S-Up>", "<cmd>t.0<Return>k=j")
-keymap.set("n", "<M-S-j>", "<cmd>t.0<Return>")
-keymap.set("n", "<M-S-Down>", "<cmd>t.0<Return>")
+----------------------------------------------
+--   ___ _ _   
+--  / __(_| |_ 
+-- | (_ | |  _|
+--  \___|_|\__|
+--             
+----------------------------------------------
 
--- "shift + tab" to decrement by one tab and "tab" to add a tab
-keymap.set("n", "<S-tab>", "<<", opts)
-keymap.set("n", "<tab>", ">>", opts)
+local git = require('gitsigns')
 
--- "Leader + n" to split buffer
-keymap.set("n", "<leader>n", "<cmd>vsplit<Return>", opts)
+map("n", "<leader>gb", function() git.blame() end, { desc = "Blame Buffer" } )
+map("n", "<leader>gd", function() git.diffthis() end, { desc = "Git diff buffer" } )
 
--- "Leader + a" to add buffer to harpoon
-keymap.set("n", "<leader>a", function() harpoon:list():add() end)
 
--- "Leader + l" to list harpoon buffers
-keymap.set("n", "<leader>l", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+----------------------------------------------
+--   ___  _   _
+--  / _ \| |_| |_  ___ _ _
+-- | (_) |  _| ' \/ -_) '_|
+--  \___/ \__|_||_\___|_|
+--
+----------------------------------------------
 
--- "ctrl + a" in insert mode accept copilot suggestion
-keymap.set("i", "<C-a>", 'copilot#Accept("<CR>")', {noremap = true, silent = true, expr = true, replace_keycodes = false })
--- "leader + c" to open copilot chat
-keymap.set("n", "<leader>c", "<cmd>Copilot panel<Return>")
+-- Switch numbers and symbols to avoid having to press shift in normal or visual mode
+map({ 'n', 'v' }, "&", "1")
+map({ 'n', 'v' }, "é", "2")
+map({ 'n', 'v' }, "\"", "3")
+map({ 'n', 'v' }, "'", "4")
+map({ 'n', 'v' }, "(", "5")
+map({ 'n', 'v' }, "-", "6")
+map({ 'n', 'v' }, "è", "7")
+map({ 'n', 'v' }, "_", "8")
+map({ 'n', 'v' }, "ç", "9")
+map({ 'n', 'v' }, "à", "0")
+map({ 'n', 'v' }, "1", "&")
+map({ 'n', 'v' }, "2", "é")
+map({ 'n', 'v' }, "3", "\"")
+map({ 'n', 'v' }, "4", "'")
+map({ 'n', 'v' }, "5", "(")
+map({ 'n', 'v' }, "7", "è")
+map({ 'n', 'v' }, "7", "_")
+map({ 'n', 'v' }, "9", "ç")
+map({ 'n', 'v' }, "0", "à")
 
--- "leader + shift + b" to toggle git-blame
-keymap.set('n', '<leader>B', ':GitBlameToggle<CR>', { noremap = true, silent = true })
+map("n", "+", "<C-a>", { desc = "Increment number" })
+map("n", "6", "<C-x>", { desc = "Decrement number" })
 
--- "alt + 1 | 2 | 3 | 4 | ...." to switch to harpoon buffer
-keymap.set("n", "<M-&>", function() harpoon:list():select(1) end)
-keymap.set("n", "<M-é>", function() harpoon:list():select(2) end)
-keymap.set("n", "<M-\">", function() harpoon:list():select(3) end)
-keymap.set("n", "<M-'>", function() harpoon:list():select(4) end)
-keymap.set("n", "<M-(>", function() harpoon:list():select(5) end)
-keymap.set("n", "<M-->", function() harpoon:list():select(6) end)
-keymap.set("n", "<M-è>", function() harpoon:list():select(7) end)
-keymap.set("n", "<M-_>", function() harpoon:list():select(8) end)
-keymap.set("n", "<M-ç>", function() harpoon:list():select(9) end)
-keymap.set("n", "<M-à>", function() harpoon:list():select(10) end)
+map("v", "<leader>r", "\"_dP", { desc = "Replace selected content by yanked content without overriding registry" })
+map("n", "<leader>r", "viw\"_dP", { desc = "Replace word by yanked content without overriding registry" })
+map("n", "<leader>R", "viW\"_dP", { desc = "Replace WORD by yanked content without overriding registry" })
+
+map("n", "<C-s>", "<cmd>w<Return>", { desc = "Save buffer" })
+map("n", "<C-q>", "<cmd>q<Return>", { desc = "Close buffer" })
+
+map("n", "<M-j>", "<cmd>m .+1<CR>==", { desc = "Move line down" })
+map("n", "<M-k>", "<cmd>m .-2<CR>==", { desc = "Move line up" })
+
+map("n", "<M-S-k>", "<cmd>t.0<Return>k=j", { desc = "Duplicate line" })
+map("n", "<M-S-j>", "<cmd>t.0<Return>", { desc = "Duplicate line and move cursor to it" })
+
+map("n", "<tab>", ">>", { noremap = true, silent = true }, { desc = "Increment by one tab" })
+map("n", "<S-tab>", "<<", { noremap = true, silent = true }, { desc = "Decrement by one tab" })
+
+map("n", "<leader>n", "<cmd>vsplit<Return>", { noremap = true, silent = true }, { desc = "Split buffer vertically" })
+
+map("n", "<C-a>", "gg<S-v>G", { desc = "Select all text" })
+
+map("n", "<S-A-f>", vim.lsp.buf.format, { desc = "Auto-indent file" })
+
+map("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear highlights" })
+
+map("t", "<Esc><Esc>", "<c-\\><c-n>", { desc = "Exit terminal mode" })

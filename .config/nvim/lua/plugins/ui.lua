@@ -1,28 +1,57 @@
 return {
     --------------------------------
-    -- Color Scheme
+    -- Colorscheme
     --------------------------------
+
     {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
+        "vague2k/vague.nvim",
         config = function()
-            require("tokyonight").setup({
-                style = "moon",
-                light_style = "day",
+            require("vague").setup({
                 transparent = true,
-                terminal_colors = true,
-                colors = {},
-                highlight = {},
+                colors = {
+                    -- slightly more vibrant colors than the original theme
+                    fg = "#d5d5d5",
+                    floatborder = "#999999",
+                    line = "#2a2a35",
+                    builtin = "#a5e0da",
+                    func = "#dd7474",
+                    string = "#f0b97a",
+                    number = "#f2a45c",
+                    property = "#cfcff0",
+                    constant = "#bebee6",
+                    comment = "#767696",
+                    parameter = "#d1a7c9",
+                    visual = "#4a5a70",
+                    error = "#ef5e76",
+                    warning = "#f2a45c",
+                    hint = "#90aaf0",
+                    operator = "#9aaacc",
+                    keyword = "#81a8cc",
+                    type = "#9ec8d0",
+                    search = "#4a5a70",
+                    plus = "#98c87a",
+                    delta = "#f5c37d",
+                },
             })
-            vim.cmd("colorscheme tokyonight")
+            vim.cmd("colorscheme vague")
             -- Override line numbers colors
-            vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#86979f', bold = true })
-            vim.api.nvim_set_hl(0, 'LineNr', { fg = '#65a2c1', bold = true })
-            vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#86979f', bold = true })
-            -- Override comments color
-            vim.api.nvim_set_hl(0, "Comment", { fg = "#86979f" })
-        end,
+            vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#606079', bold = true })
+            vim.api.nvim_set_hl(0, 'LineNr', { fg = '#7894ab', bold = true })
+            vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#606079', bold = true })
+        end
+    },
+
+    --------------------------------
+    -- Better UI
+    --------------------------------
+
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {},
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        }
     },
 
     --------------------------------
@@ -54,23 +83,8 @@ return {
         opts = {
             delay = 100,
         },
-        config = function()
-        end,
+        config = function() end,
     },
-
-    --------------------------------
-    -- Better Ui and Notifications
-    --------------------------------
-
-    -- {
-    --     "folke/noice.nvim",
-    --     event = "VeryLazy",
-    --     opts = {},
-    --     dependencies = {
-    --         "MunifTanjim/nui.nvim",
-    --         "rcarriga/nvim-notify",
-    --     }
-    -- },
 
     --------------------------------
     -- File Tree
@@ -84,8 +98,7 @@ return {
             "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
         },
-        config = function()
-        end
+        config = function() end,
     },
 
     --------------------------------
@@ -99,6 +112,9 @@ return {
         },
         config = function()
             require('lualine').setup {
+                sections = {
+                    lualine_a = { { 'mode', fmt = function(res) return ' ' .. res end } },
+                },
                 options = {
                     component_separators = '',
                     section_separators = { left = '', right = '' },
@@ -118,8 +134,7 @@ return {
             vim.o.timeout = true
             vim.o.timeoutlen = 300
         end,
-        config = function()
-        end
+        config = function() end
     },
 
 
@@ -137,21 +152,21 @@ return {
             local dashboard = require("alpha.themes.dashboard")
 
             dashboard.section.header.val = {
-                [[                                                                       ]],
-                [[                                                                       ]],
-                [[                                                                       ]],
-                [[                                                                       ]],
-                [[                                                                     ]],
-                [[       ████ ██████           █████      ██                     ]],
-                [[      ███████████             █████                             ]],
-                [[      █████████ ███████████████████ ███   ███████████   ]],
-                [[     █████████  ███    █████████████ █████ ██████████████   ]],
-                [[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
-                [[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
-                [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
-                [[                                                                       ]],
-                [[                                                                       ]],
-                [[                                                                       ]],
+                [[                                           ]],
+                [[                                           ]],
+                [[                                           ]],
+                [[                                           ]],
+                [[                                         ]],
+                [[ █████      ██                         ]],
+                [[  █████                                 ]],
+                [[   ████████ ███   ███████████       ]],
+                [[    ████████ █████ ██████████████       ]],
+                [[     ███████ █████ █████ ████ █████       ]],
+                [[      ██████ █████ █████ ████ █████      ]],
+                [[       ████ █████ █████ ████ ██████ btw ]],
+                [[                                           ]],
+                [[                                           ]],
+                [[                                           ]],
             }
 
             alpha.setup(dashboard.opts)
