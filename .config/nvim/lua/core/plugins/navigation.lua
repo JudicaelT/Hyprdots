@@ -43,7 +43,6 @@ return {
         config = function()
             require("symbols-outline").setup({
                 auto_close = true,
-                width = 15,
             })
         end,
     },

@@ -1,0 +1,44 @@
+local telescope = require("telescope.builtin")
+local flash = require("flash");
+local harpoon = require("harpoon")
+harpoon:setup()
+
+local map = vim.keymap.set
+
+map("n", "<leader>f", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>", { desc = "Search file" })
+map("n", "<leader>g", telescope.live_grep, { desc = "Grep project" })
+map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<CR>",
+    { desc = "Grep in current buffer" })
+map("n", "!", '<cmd>lua require("telescope.builtin").lsp_references()<CR>', { desc = "Find element references" })
+
+map("n", "<leader>a", function() harpoon:list():add() end, { desc = "Pin opened buffer" })
+map("n", "<leader>l", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "List pinned buffers" })
+
+map("n", "<M-&>", function() harpoon:list():select(1) end, { desc = "Open pinned buffer 1" })
+map("n", "<M-é>", function() harpoon:list():select(2) end, { desc = "Open pinned buffer 2" })
+map("n", "<M-\">", function() harpoon:list():select(3) end, { desc = "Open pinned buffer 3" })
+map("n", "<M-'>", function() harpoon:list():select(4) end, { desc = "Open pinned buffer 4" })
+map("n", "<M-(>", function() harpoon:list():select(5) end, { desc = "Open pinned buffer 5" })
+map("n", "<M-->", function() harpoon:list():select(6) end, { desc = "Open pinned buffer 6" })
+map("n", "<M-è>", function() harpoon:list():select(7) end, { desc = "Open pinned buffer 7" })
+map("n", "<M-_>", function() harpoon:list():select(8) end, { desc = "Open pinned buffer 8" })
+
+map({ 'n', 'v' }, "<C-j>", "5j", { desc = "Go five lines down" })
+map({ 'n', 'v' }, "<C-k>", "5k", { desc = "Go five lines up" })
+
+map({ 'n', 'v' }, '<C-h>', '{', { desc = "Go to previous paragraph" })
+map({ 'n', 'v' }, '<C-l>', '}', { desc = "Go to next paragraph" })
+
+map({ 'n', 'v' }, "<C-d>", "<C-d>zz", { desc = "Center content after 'Ctrl + d'" })
+map({ 'n', 'v' }, "<C-u>", "<C-u>zz", { desc = "Center content after 'Ctrl + u'" })
+map("n", "n", "nzz", { desc = "Center content after going to next find" })
+map("n", "N", "Nzz", { desc = "Center content after going to previous find" })
+map({ 'n', 'v' }, "G", "Gzz", { desc = "Center content after going to bottom of the buffer" })
+
+map({ 'n', 'v' }, "<M-h>", "^", { desc = "Go the beginning of the line" })
+map({ 'n', 'v' }, "<M-l>", "$", { desc = "Go the end of the line" })
+
+map("n", "<leader>s", "<cmd>SymbolsOutline<CR>", { desc = "Open symbols tree" })
+
+map({ "n", "x", "o" }, "s", function() flash.jump() end, { desc = "Enter Flash mode" })
+map({ "n", "x", "o" }, "S", function() flash.treesitter() end, { desc = "Enter Flash Treesitter mode" })
