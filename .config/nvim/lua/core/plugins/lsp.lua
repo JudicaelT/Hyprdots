@@ -22,7 +22,7 @@ return {
                     "dotls",
                     "html",
                     "jsonls",
-                    "quick_lint_js", -- JavaScript
+                    "ts_ls", -- TypeScript / JavaScript
                     "rust_analyzer",
                     "phpactor",
                     "sqlls",
@@ -46,7 +46,10 @@ return {
             lspconfig.dotls.setup({})
             lspconfig.html.setup({})
             lspconfig.jsonls.setup({})
-            lspconfig.quick_lint_js.setup({})
+            lspconfig.ts_ls.setup({
+                filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+                root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+            })
             lspconfig.rust_analyzer.setup({})
             lspconfig.phpactor.setup({})
             lspconfig.sqlls.setup({})

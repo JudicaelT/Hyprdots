@@ -15,4 +15,5 @@ vim.g.mapleader = " " -- Set spacebar as leader key
 require("core.keymaps.navigation")
 require("core.keymaps.lsp")
 require("core.keymaps.git")
+require("core.keymaps.editing")
 require("core.keymaps.extra")
