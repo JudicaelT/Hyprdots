@@ -25,7 +25,7 @@ map("n", "<C-s>", "<cmd>w<CR>", { desc = "Save buffer" })
 map({ "i", "v", "o" }, "<C-s>", "<esc><cmd>w<CR>", { desc = "Exit current mode and save buffer" })
 map("n", "<C-q>", "<cmd>q<CR>", { desc = "Close buffer" })
 
-map("n", "<leader>n", "<cmd>vsplit<Return>", { noremap = true, silent = true }, { desc = "Split buffer vertically" })
+map("n", "<leader>n", "<cmd>vsplit<CR>", { noremap = true, silent = true }, { desc = "Split buffer vertically" })
 
 map("n", "<C-a>", "gg<S-v>G", { desc = "Select all text" })
 
