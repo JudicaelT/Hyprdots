@@ -11,14 +11,23 @@ function Separator() {
 }
 
 function Diagnostics() {
+    const memoryUsage = Variable("").poll(
+        3000,
+        ["bash", "-c", "free | grep Mem | awk '{print $3 / $2}'"],
+    )
+    const cpuUsage = Variable("").poll(
+        3000,
+        ["bash", "-c", "vmstat 1 2 | tail -1 | awk '{printf \"%.2f\", (100 - $15)/100}'"],
+    )
+
     return <box className="Diagnostics" vertical>
         <box>
-            <circularprogress value={.1} startAt={-0.25} endAt={0.75}>
+            <circularprogress value={memoryUsage()} startAt={-0.25} endAt={0.75}>
                 <label>󰍛</label>
             </circularprogress>
         </box>
         <box>
-            <circularprogress value={.05} startAt={-0.25} endAt={0.75}>
+            <circularprogress value={cpuUsage()} startAt={-0.25} endAt={0.75}>
                 <label>󰻠</label>
             </circularprogress>
         </box>
@@ -27,6 +36,7 @@ function Diagnostics() {
 
 function Workspaces() {
     const hypr = Hyprland.get_default()
+
     return <box className="Workspaces" vertical>
         {bind(hypr, "workspaces").as(workspaces =>
             workspaces
@@ -35,13 +45,20 @@ function Workspaces() {
                 .map(workspace => (
                     <button
                         className={
-                            bind(hypr, "focusedWorkspace")
-                                .as(focused => workspace === focused ? "focused" : "")
+                            bind(hypr, "focusedWorkspace").as(focused => {
+                                let className: string = ""
+                                const isWorkspaceActive: boolean = workspace === focused
+                                const isWorkspaceEmpty: boolean = workspace.get_clients().length == 0
+
+                                if (isWorkspaceActive) className += " focused"
+                                if (isWorkspaceEmpty) className += " empty"
+
+                                return className
+                            })
                         }
                         onClicked={() => workspace.focus()}>
                         {
-                            bind(hypr, "focusedWorkspace")
-                                .as(fw => workspace === fw ? "󰺕" : "󰄰")
+                            bind(hypr, "focusedWorkspace").as(focused => workspace === focused ? "󰺕" : "󰄰")
                         }
                     </button>
                 ))
