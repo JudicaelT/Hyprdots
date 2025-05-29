@@ -44,7 +44,5 @@ map({ "n", "v" }, "G", "Gzz", { desc = "Center content after going to bottom of 
 map({ "n", "v" }, "<M-h>", "^", { desc = "Go the beginning of the line" })
 map({ "n", "v" }, "<M-l>", "$", { desc = "Go the end of the line" })
 
-map("n", "<leader>s", "<cmd>SymbolsOutline<CR>", { desc = "Open symbols tree" })
-
 map({ "n", "x", "o" }, "<leader>z", function() flash.jump() end, { desc = "Enter Flash mode" })
 map({ "n", "x", "o" }, "<leader>Z", function() flash.treesitter() end, { desc = "Enter Flash Treesitter mode" })
