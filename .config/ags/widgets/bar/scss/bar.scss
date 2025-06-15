@@ -4,10 +4,10 @@ window.BarWindow {
   $button-inactive-background: #191919;
   $button-active-background: #f2a45c;
 
-  background: transparent;
   color: $fg-color;
   font-size: 15px;
   font-weight: bold;
+  font-family: JetbrainsMono Nerd Font;
 
   .Bar {
     background: $bg-color;
@@ -42,20 +42,14 @@ window.BarWindow {
     margin-bottom: 10px;
   }
 
-  .Diagnostics {
-    box {
+  .ToolBox {
+    button {
       margin-bottom: 10px;
-    }
-
-    circularprogress {
-      min-width: 40px;
-      min-height: 40px;
-      background-color: $button-inactive-background;
-      font-size: 3px;
+      border-radius: 100px;
 
       label {
-        margin-left: -3px;
-        font-size: 25px;
+        font-size: 18px;
+        margin-left: -2px;
       }
     }
 
@@ -143,9 +137,5 @@ window.BarWindow {
     font-size: 15px;
     font-weight: bold;
     border-radius: 30px;
-  }
-
-  .Panel.hidden {
-    margin-left: -50px;
   }
 }

@@ -1,0 +1,20 @@
+window.TimeWindow {
+  $text-color: #dddddd;
+
+  .time {
+    margin-top: 200px;
+    /** reserving space for shadows using margin-left/right */
+    margin-left: 50px;
+    margin-right: 50px;
+    color: $text-color;
+    text-shadow: 0px 0px 10px #00000050;
+    font-size: 115px;
+    font-family: Nelphim;
+  }
+
+  .date {
+    color: $text-color;
+    font-size: 30px;
+    font-family: roboto;
+  }
+}

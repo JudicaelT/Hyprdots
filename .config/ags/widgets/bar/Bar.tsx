@@ -17,7 +17,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
                 <box vertical valign={Gtk.Align.START}>
                     <Profile />
                     <Separator />
-                    <Diagnostics />
+                    <ToolBox />
                 </box>
                 <box vertical valign={Gtk.Align.CENTER}>
                     <Workspaces />
@@ -40,26 +40,10 @@ function Separator() {
     return <box className="Separator"></box>
 }
 
-function Diagnostics() {
-    const memoryUsage = Variable("").poll(
-        3000,
-        ["bash", "-c", "free | grep Mem | awk '{print $3/ $2}'"],
-    )
-    const cpuUsage = Variable("").poll(
-        3000,
-        ["bash", "-c", "vmstat 1 2 | tail -1 | awk '{printf \"%.2f\", (100 - $15)/100}'"],
-    )
-    return <box className="Diagnostics" vertical>
-        <box>
-            <circularprogress value={memoryUsage()} startAt={-0.25} endAt={0.75}>
-                <label>󰍛</label>
-            </circularprogress>
-        </box>
-        <box>
-            <circularprogress value={cpuUsage()} startAt={-0.25} endAt={0.75}>
-                <label>󰻠</label>
-            </circularprogress>
-        </box>
+function ToolBox() {
+    return <box className="ToolBox" vertical>
+        <button><label>󱣵</label></button>
+        <button><label>󰈊</label></button>
     </box>
 }
 
