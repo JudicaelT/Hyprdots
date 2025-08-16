@@ -1,23 +1,10 @@
-import { App, Astal, Gdk } from "astal/gtk3"
 import { Variable } from "astal"
 
-export default function SysMonitor(gdkmonitor: Gdk.Monitor) {
-    const { RIGHT, BOTTOM } = Astal.WindowAnchor
-    return <window
-        className="SysMonitorWindow"
-        gdkmonitor={gdkmonitor}
-        anchor={RIGHT | BOTTOM}
-        layer={Astal.Layer.BACKGROUND}
-        exclusivity={Astal.Exclusivity.IGNORE}
-        application={App}
-    >
-        <box vertical>
-            <centerbox vertical className="SysMonitor">
-                <MemoryUsage />
-                <CpuUsage />
-            </centerbox>
-        </box>
-    </window>
+export default function SysMonitor() {
+    return <centerbox className="SysMonitor">
+        <MemoryUsage />
+        <CpuUsage />
+    </centerbox>
 }
 
 function MemoryUsage() {

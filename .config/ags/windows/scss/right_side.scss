@@ -1,0 +1,9 @@
+@use "widgets/time/scss/time.scss";
+@use "widgets/sys_monitor/scss/sys_monitor.scss";
+
+window.RightSideWindow {
+  >box {
+    margin-top: 200px;
+    margin-right: 400px;
+  }
+}

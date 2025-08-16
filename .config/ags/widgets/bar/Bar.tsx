@@ -1,35 +1,26 @@
-import { App, Astal, Gtk, Gdk } from "astal/gtk3"
+import { Gtk } from "astal/gtk3"
 import { Variable, bind } from "astal"
 import Hyprland from "gi://AstalHyprland"
 import { togglePanel } from "./Panel"
 
-export default function Bar(gdkmonitor: Gdk.Monitor) {
-    const { LEFT, TOP, BOTTOM } = Astal.WindowAnchor
-    return <window
-        className="BarWindow"
-        gdkmonitor={gdkmonitor}
-        exclusivity={Astal.Exclusivity.EXCLUSIVE}
-        anchor={LEFT | TOP | BOTTOM}
-        application={App}
-    >
-        <box>
-            <centerbox vertical className="Bar">
-                <box vertical valign={Gtk.Align.START}>
-                    <Profile />
-                    <Separator />
-                    <ToolBox />
-                </box>
-                <box vertical valign={Gtk.Align.CENTER}>
-                    <Workspaces />
-                </box>
-                <box vertical valign={Gtk.Align.END}>
-                    <Settings />
-                    <Clock />
-                </box>
-            </centerbox>
-            <box vertical className="bar-corners" />
-        </box>
-    </window>
+export default function Bar() {
+    return <box>
+        <centerbox vertical className="Bar">
+            <box vertical valign={Gtk.Align.START}>
+                <Profile />
+                <Separator />
+                <ToolBox />
+            </box>
+            <box vertical valign={Gtk.Align.CENTER}>
+                <Workspaces />
+            </box>
+            <box vertical valign={Gtk.Align.END}>
+                <Settings />
+                <Clock />
+            </box>
+        </centerbox>
+        <box vertical className="bar-corners" />
+    </box>
 }
 
 function Profile() {
@@ -42,7 +33,7 @@ function Separator() {
 
 function ToolBox() {
     return <box className="ToolBox" vertical>
-        <button><label>󱣵</label></button>
+        <button><label>󰄄</label></button>
         <button><label>󰈊</label></button>
     </box>
 }
