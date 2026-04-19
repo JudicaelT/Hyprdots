@@ -8,7 +8,10 @@ return {
     {
         "hrsh7th/nvim-cmp",
         config = function()
-            local cmp = require("cmp")
+            local isEnabled, cmp = pcall(require, "cmp")
+            if false == isEnabled then
+                return
+            end
             cmp.setup({
                 window = {
                     completion = cmp.config.window.bordered(),
@@ -24,11 +27,19 @@ return {
             })
         end,
     },
+    {
+        "hanspinckaers/zap.nvim",
+        lazy = false,
+        init = function()
+            vim.opt.completeopt = "menu,menuone,noselect"
+        end,
+        config = function() end,
+        enabled = true
+    },
 
     -----------------------
     -- Multiline editing
     -----------------------
-
     {
         "mg979/vim-visual-multi",
         config = function() end,
@@ -37,30 +48,32 @@ return {
     -----------------------
     -- Formatting
     -----------------------
-
     {
         "nvimtools/none-ls.nvim",
         config = function()
-            local null_ls = require("null-ls")
-            null_ls.setup({})
+            local isEnabled, nullLs = pcall(require, "null-ls")
+            if isEnabled then
+                nullLs.setup({})
+            end
         end
     },
 
     -----------------------
     -- Autoclose symbols
     -----------------------
-
     {
         "m4xshen/autoclose.nvim",
         config = function()
-            require("autoclose").setup()
+            local isEnabled, autoclose = pcall(require, "autoclose")
+            if isEnabled then
+                autoclose.setup()
+            end
         end,
     },
 
     -----------------------
     -- Comments
     -----------------------
-
     {
         'numToStr/Comment.nvim',
         opts = {}

@@ -1,8 +1,7 @@
 return {
-    --------------------------------
+    -----------------------
     -- Colorscheme
-    --------------------------------
-
+    -----------------------
     {
         "vague2k/vague.nvim",
         config = function()
@@ -34,17 +33,16 @@ return {
                 },
             })
             vim.cmd("colorscheme vague")
-            -- Override line numbers colors
-            vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#606079', bold = true })
-            vim.api.nvim_set_hl(0, 'LineNr', { fg = '#7894ab', bold = true })
-            vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#606079', bold = true })
+            -- Override line numbers colors to be more visible
+            vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#4d4d5f', bold = true })
+            vim.api.nvim_set_hl(0, 'LineNr', { fg = '#a5e0da', bold = true })
+            vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#4d4d5f', bold = true })
         end
     },
 
-    --------------------------------
-    -- Better UI
-    --------------------------------
-
+    -----------------------
+    -- Better ui
+    -----------------------
     {
         "folke/noice.nvim",
         event = "VeryLazy",
@@ -54,30 +52,18 @@ return {
         }
     },
 
-    --------------------------------
-    -- Code highlighting
-    --------------------------------
-
+    -----------------------
+    -- Syntax tree parsing
+    -----------------------
     {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-        config = function()
-            require "nvim-treesitter.configs".setup {
-                auto_install = true,
-                highlight = {
-                    enable = true,
-                },
-                indent = {
-                    enable = true,
-                },
-            }
-        end
+        'nvim-treesitter/nvim-treesitter',
+        lazy = false,
+        build = ':TSUpdate'
     },
 
-    -------------------------
-    -- Word Highlighting
-    -------------------------
-
+    -----------------------
+    -- Word highlighting
+    -----------------------
     {
         "RRethy/vim-illuminate",
         opts = {
@@ -86,25 +72,9 @@ return {
         config = function() end,
     },
 
-    --------------------------------
-    -- File Tree
-    --------------------------------
-
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons",
-            "MunifTanjim/nui.nvim",
-        },
-        config = function() end,
-    },
-
-    --------------------------------
-    -- Status Bar
-    --------------------------------
-
+    -----------------------
+    -- Bar
+    -----------------------
     {
         'nvim-lualine/lualine.nvim',
         dependencies = {
@@ -123,10 +93,9 @@ return {
         end
     },
 
-    --------------------------------
-    -- Which Key
-    --------------------------------
-
+    -----------------------
+    -- Keymap help
+    -----------------------
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
@@ -138,10 +107,9 @@ return {
     },
 
 
-    --------------------------------
-    -- Start page
-    --------------------------------
-
+    -----------------------
+    -- Home screen
+    -----------------------
     {
         "goolord/alpha-nvim",
         dependencies = {
@@ -150,7 +118,6 @@ return {
         config = function()
             local alpha = require("alpha")
             local dashboard = require("alpha.themes.dashboard")
-
             dashboard.section.header.val = {
                 [[                                           ]],
                 [[                                           ]],
@@ -168,7 +135,6 @@ return {
                 [[                                           ]],
                 [[                                           ]],
             }
-
             alpha.setup(dashboard.opts)
         end,
     },

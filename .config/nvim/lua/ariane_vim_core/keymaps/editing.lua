@@ -13,8 +13,5 @@ map("n", "<M-k>", "<cmd>m .-2<CR>==", { desc = "Move line up" })
 map("n", "<M-S-k>", "<cmd>t.0<CR>k", { desc = "Duplicate line" })
 map("n", "<M-S-j>", "<cmd>t.0<CR>", { desc = "Duplicate line and move cursor to it" })
 
-map("n", "<tab>", ">>", { noremap = true, silent = true }, { desc = "Increment by one tab" })
-map("n", "<S-tab>", "<<", { noremap = true, silent = true }, { desc = "Decrement by one tab" })
-
 map("n", "+", "<C-a>", { desc = "Increment number" })
 map("n", "6", "<C-x>", { desc = "Decrement number" })
