@@ -1,3 +1,0 @@
-[submodule "lua/ariane_vim_core"]
-	path = lua/ariane_vim_core
-	url = https://github.com/JudicaelT/ariane_vim_core.git
