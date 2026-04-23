@@ -1,45 +1,36 @@
-@define-color primary #dddddd;
+@define-color primary #27272d;
 @define-color text #dddddd;
-@define-color base #141414;
+@define-color base #202020;
 
 * {
     font-family: 'JetbrainsMono Nerd Font', monospace;
+    font-weight: bold;
     font-size: 20px;
 }
 
 window {
     margin: 0px;
-    padding: 10px;
-    border: 2px solid @primary;
-    border-radius: 18px;
-    background-color: @base;
-}
-
-#inner-box {
-    margin: 5px;
-    padding: 10px;
-    border: none;
+    border: 2px solid #272727;
+    border-radius: 20px;
     background-color: @base;
 }
 
 #outer-box {
     margin: 5px;
-    padding: 10px;
-    border: none;
-    background-color: @base;
-}
-
-#scroll {
-    margin: 0px;
-    padding: 10px;
     border: none;
     background-color: @base;
 }
 
 #input {
-    margin: 5px 20px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    margin-bottom: 10px;
     padding: 10px;
-    border-radius: 0.1em;
+    padding-left: 30px;
+    padding-right: 30px;
+    border: none;
+    border-bottom: 2px solid @primary;
+    border-radius: 0;
     color: @text;
     background-color: @base;
 }
@@ -54,11 +45,15 @@ window {
     color: @text;
 }
 
+#entry {
+    margin-left: 25px;
+    margin-right: 25px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 20px;
+}
+
 #entry:selected {
     background-color: @primary;
     border: 0.11em solid @primary;
-}
-
-#entry:selected #text {
-    color: @base;
 }
