@@ -1,0 +1,25 @@
+window.WorkspacesWindow {
+  $focused-color: #202020;
+  $text-color: #88807b;
+
+  .Workspaces {
+    font-size: 50px;
+    font-family: JetbrainsMono Nerd Font;
+    color: $text-color;
+
+    button {
+      box-shadow: none;
+      text-shadow: none;
+      color: $text-color;
+      border: none;
+      padding-left: 15px;
+      padding-right: 25px;
+      background: none;
+    }
+
+    .focused {
+      color: $focused-color;
+    }
+
+  }
+}

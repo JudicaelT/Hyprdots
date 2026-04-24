@@ -1,6 +1,5 @@
 import { App, Astal, Gdk } from "astal/gtk3"
 import Time from "../widgets/time/Time"
-import SysMonitor from "../widgets/sys_monitor/SysMonitor"
 
 export default function RightSide(gdkmonitor: Gdk.Monitor) {
     const { TOP, RIGHT } = Astal.WindowAnchor
@@ -12,9 +11,8 @@ export default function RightSide(gdkmonitor: Gdk.Monitor) {
         exclusivity={Astal.Exclusivity.IGNORE}
         application={App}
     >
-        <box vertical>
+        <box>
             <Time />
-            <SysMonitor />
         </box>
     </window>
 }

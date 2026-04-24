@@ -1,7 +1,7 @@
 import { Variable } from "astal"
 import { App, Astal, Gdk } from "astal/gtk3"
 
-let isPanelVisible: Variable<boolean> = Variable(false);
+let isVisible: Variable<boolean> = Variable(false);
 
 export default function Panel(gdkmonitor: Gdk.Monitor) {
     const { LEFT, TOP, BOTTOM } = Astal.WindowAnchor
@@ -11,7 +11,7 @@ export default function Panel(gdkmonitor: Gdk.Monitor) {
         exclusivity={Astal.Exclusivity.IGNORE}
         anchor={LEFT | TOP | BOTTOM}
         application={App}
-        visible={isPanelVisible.get()}
+        visible={isVisible.get()}
         widthRequest={500}
     >
         <box className="Panel">
@@ -21,6 +21,6 @@ export default function Panel(gdkmonitor: Gdk.Monitor) {
 }
 
 export function togglePanel() {
-    isPanelVisible.set(!isPanelVisible.get())
-    console.log(isPanelVisible)
+    isVisible.set(!isVisible.get())
+    console.log(isVisible)
 }

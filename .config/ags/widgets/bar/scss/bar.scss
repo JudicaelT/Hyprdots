@@ -1,141 +1,87 @@
 window.BarWindow {
   $fg-color: #dddddd;
-  $bg-color: rgba(20, 20, 20, 0.75);
-  $button-inactive-background: #101010;
-  $button-active-background: #f2a45c;
-
-  color: $fg-color;
-  font-size: 15px;
-  font-weight: bold;
-  font-family: JetbrainsMono Nerd Font;
+  $bg-color: #202020;
+  $button-inactive-background: #000000;
+  $button-active-background: #efb879;
 
   .Bar {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-weight: bold;
+    font-family: JetbrainsMono Nerd Font;
+    font-size: 17px;
+    color: $fg-color;
     background: $bg-color;
-    padding: 7px;
   }
 
   .bar-corners {
-    padding-left: 30px;
-    border-radius: 25px 0px 0px 25px;
-    box-shadow: 0px 35px $bg-color, 0px -35px $bg-color;
+    padding-top: 25px;
+    border-radius: 0px 0px 30px 30px;
+    box-shadow: 35px 0px $bg-color, -35px 0px $bg-color;
   }
 
   button {
-    background: $button-inactive-background;
-    border-radius: 15px;
-    margin-bottom: 8px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    color: $fg-color;
+    box-shadow: none;
+    text-shadow: none;
+    background: none;
+    border: none;
+    padding: 0;
   }
 
-  .Profile {
-    margin-left: -10px;
-    padding-top: 5px;
-    font-size: 33px;
-    background: transparent;
-  }
-
-  .Separator {
-    padding-top: 1px;
-    background: #777777;
-    margin-top: 8px;
-    margin-bottom: 10px;
-  }
-
+  .Monitoring,
+  .Settings,
   .ToolBox {
-    button {
-      margin-bottom: 10px;
-      border-radius: 100px;
-
-      label {
-        font-size: 18px;
-        margin-left: -2px;
-      }
+    label {
+      margin-left: 10px;
+      margin-right: 10px;
     }
-
-    :last-child {
-      margin-bottom: 0px;
-    }
-  }
-
-  .Workspaces {
-    background: $button-inactive-background;
-    border-radius: 13px;
-    margin-bottom: 8px;
 
     button {
-      background: transparent;
-      padding-left: 7px;
-      font-size: 20px;
-      padding-top: 7px;
-      padding-bottom: 7px;
-      border-radius: 13px;
-      margin: 0px;
-    }
-
-    button.empty {
-      color: #757575;
-    }
-
-    button.focused {
-      background: $button-active-background;
-      color: $button-inactive-background;
-    }
-  }
-
-  .Settings {
-    * {
-      margin-bottom: 3px;
-      margin-top: 3px;
+      margin-left: 5px;
+      margin-right: 5px;
     }
 
     :first-child {
-      margin-top: 0px;
+      margin-left: 0;
     }
 
     :last-child {
-      margin-bottom: 0px;
-    }
-
-    .brightness {
-      font-size: 17px;
-      margin-left: -6px;
-    }
-
-    .volume {
-      margin-left: -2px;
-    }
-
-    .network {
-      margin-left: -4px;
-    }
-
-    .bluetooth {
-      font-size: 16px;
-      margin-left: -3px;
+      margin-right: 0;
     }
   }
 
-  .Clock {
-    font-weight: bold;
+  .ToolBox {
+    label {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    button {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    :first-child {
+      margin-left: 0;
+    }
+
+    :last-child {
+      margin-right: 0;
+    }
   }
 
-  .Settings:hover,
-  .Clock:hover {
-    transition: 0.3s;
-    background-color: $button-active-background;
-    color: $button-inactive-background;
+  .Separator {
+    background: #777777;
+    padding-right: 2px;
+    margin-left: 15px;
+    margin-right: 15px;
   }
 
-  .Panel {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: -10px;
-    padding: 20px;
-    background: $bg-color;
-    color: $fg-color;
-    font-size: 15px;
-    font-weight: bold;
-    border-radius: 30px;
+  .Settings label {
+    margin-left: 7px;
+    margin-right: 7px;
   }
 }
