@@ -1,17 +1,19 @@
-import { App, Astal, Gdk, Gtk } from "astal/gtk3"
-import Workspaces from "../widgets/workspaces/Workspaces"
+import app from "ags/gtk4/app"
+import { Astal, Gdk, Gtk } from "ags/gtk4"
+import WorkspacesWidget from "../widgets/workspaces/Workspaces"
 
-export default function RightSide(gdkmonitor: Gdk.Monitor) {
+export default function Workspaces({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
     const { TOP, LEFT, BOTTOM } = Astal.WindowAnchor
     return <window
-        className="WorkspacesWindow"
-        gdkmonitor={gdkmonitor}
+        class="WorkspacesWindow"
+        visible
         anchor={TOP | LEFT | BOTTOM}
-        layer={Astal.Layer.BACKGROUND}
-        application={App}
+        layer={Astal.Layer.BOTTOM}
+        gdkmonitor={gdkmonitor}
+        application={app}
     >
         <box valign={Gtk.Align.CENTER}>
-            <Workspaces />
+            <WorkspacesWidget />
         </box>
     </window>
 }

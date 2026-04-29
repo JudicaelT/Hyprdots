@@ -1,18 +1,18 @@
-import { App, Astal, Gdk } from "astal/gtk3"
+import app from "ags/gtk4/app"
+import { Astal, Gdk } from "ags/gtk4"
 import Time from "../widgets/time/Time"
 
-export default function RightSide(gdkmonitor: Gdk.Monitor) {
+export default function RightSide({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
     const { TOP, RIGHT } = Astal.WindowAnchor
     return <window
-        className="RightSideWindow"
-        gdkmonitor={gdkmonitor}
+        class="RightSideWindow"
+        visible
         anchor={TOP | RIGHT}
-        layer={Astal.Layer.BACKGROUND}
+        layer={Astal.Layer.BOTTOM}
         exclusivity={Astal.Exclusivity.IGNORE}
-        application={App}
+        gdkmonitor={gdkmonitor}
+        application={app}
     >
-        <box>
-            <Time />
-        </box>
+        <Time />
     </window>
 }

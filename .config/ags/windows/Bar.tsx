@@ -1,15 +1,18 @@
-import { App, Astal, Gdk } from "astal/gtk3"
+import app from "ags/gtk4/app"
+import { Astal, Gdk } from "ags/gtk4"
 import BarWidget from "../widgets/bar/Bar"
 
-export default function Bar(gdkmonitor: Gdk.Monitor) {
+export default function Bar({ gdkmonitor }: { gdkmonitor: Gdk.Monitor }) {
     const { LEFT, BOTTOM, RIGHT } = Astal.WindowAnchor
     return <window
-        className="BarWindow"
+        class="BarWindow"
+        visible
+        anchor={LEFT | BOTTOM | RIGHT}
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
-        anchor={LEFT | BOTTOM | RIGHT}
-        application={App}
+        application={app}
     >
         <BarWidget />
     </window>
+
 }
