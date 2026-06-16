@@ -115,12 +115,12 @@ install_fonts() {
     curl -L \
         https://github.com/JudicaelT/Hyprdots/raw/refs/heads/main/.local/share/fonts/JetBrainsMono.zip?download= \
         -o "$TMP_DIR/JetBrainsMono.zip"
-    unzip -qo "$TMP_DIR/JetBrainsMono.zip" -d $FONT_DIR
+    unzip -qo "$TMP_DIR/JetBrainsMono.zip" -d $FONT_DIR/JetBrainsMono
 
     curl -L \
         https://github.com/JudicaelT/Hyprdots/raw/refs/heads/main/.local/share/fonts/Nelphim-Font.zip?download= \
         -o "$TMP_DIR/Nelphim-Font.zip"
-    unzip -qo "$TMP_DIR/Nelphim-Font.zip" -d $FONT_DIR
+    unzip -qo "$TMP_DIR/Nelphim-Font.zip" -d $FONT_DIR/Nelphim-Font
 
     rm -rf "$TMP_DIR"
 }
