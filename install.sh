@@ -7,6 +7,7 @@ BOLD_GREEN="\e[1;32m"
 BOLD_RED="\e[1;31m"
 NC="\e[0m"
 CONFIG_DIR=~/.config
+FONT_DIR=~/.local/share/fonts
 SOURCE_CONFIG_DIR="$(pwd)/.config"
 PACKAGES=(
     aylurs-gtk-shell
@@ -103,6 +104,27 @@ copy_dotfiles() {
     cp .bashrc ~/
 }
 copy_dotfiles
+
+install_fonts() {
+    echo -e "${BOLD_YELLOW}Installing fonts...${NC}"
+
+    mkdir -p $FONT_DIR
+    local TMP_DIR
+    TMP_DIR=$(mktemp -d)
+
+    curl -L \
+        https://github.com/JudicaelT/Hyprdots/raw/refs/heads/main/.local/share/fonts/JetBrainsMono.zip?download= \
+        -o "$TMP_DIR/JetBrainsMono.zip"
+    unzip -qo "$TMP_DIR/JetBrainsMono.zip" -d $FONT_DIR
+
+    curl -L \
+        https://github.com/JudicaelT/Hyprdots/raw/refs/heads/main/.local/share/fonts/Nelphim-Font.zip?download= \
+        -o "$TMP_DIR/Nelphim-Font.zip"
+    unzip -qo "$TMP_DIR/Nelphim-Font.zip" -d $FONT_DIR
+
+    rm -rf "$TMP_DIR"
+}
+install_fonts
 
 echo
 echo -e "${BOLD_GREEN}All done! You may now restart your computer.${NC}"
