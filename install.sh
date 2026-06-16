@@ -79,13 +79,13 @@ install_packages() {
 }
 install_packages
 
-setup_config_dir() {
+copy_dotfiles() {
     if ! test -d $CONFIG_DIR/ags; then
         echo -e "${BOLD_YELLOW}Initializing AGS...${NC}"
         ags init
         echo
     fi
-    echo -e "${BOLD_YELLOW}Copying configuration files...${NC}"
+    echo -e "${BOLD_YELLOW}Copying dotfiles...${NC}"
     rm -rf $CONFIG_DIR/ags/app.ts
     rm -rf $CONFIG_DIR/ags/env.d.ts
     rm -rf $CONFIG_DIR/ags/.gitignore
@@ -100,8 +100,9 @@ setup_config_dir() {
             cp -rf "$config" "$CONFIG_DIR/";
         fi
     done
+    cp .bashrc ~/
 }
-setup_config_dir
+copy_dotfiles
 
 echo
 echo -e "${BOLD_GREEN}All done! You may now restart your computer.${NC}"
