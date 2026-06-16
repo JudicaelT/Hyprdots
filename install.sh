@@ -52,15 +52,18 @@ print_recap() {
     echo -e "${NC}"
 
     read -rp "Continue? [y/N]: " confirm
-    if "$confirm" in [yY]|[yY][eE][sS]; then
-        echo -e "${BOLD_GREEN}Starting installation...${NC}";
-        echo
-    else
-        echo -e "${BOLD_RED}Installation cancelled.${NC}";
-        exit 0;
-    fi
+
+    case "$confirm" in [yY]|[yY][eE][sS])
+            echo -e "${BOLD_GREEN}Starting installation...${NC}"
+            echo
+            ;;
+        *)
+            echo -e "${BOLD_RED}Installation cancelled.${NC}"
+            exit 0
+            ;;
+    esac
 }
-print_recap()
+print_recap
 
 install_packages() {
     for package in "${PACKAGES[@]}"; do
@@ -74,7 +77,7 @@ install_packages() {
         fi
     done
 }
-install_packages()
+install_packages
 
 setup_config_dir() {
     if ! test -d $CONFIG_DIR/ags; then
@@ -98,6 +101,6 @@ setup_config_dir() {
         fi
     done
 }
-setup_config_dir()
+setup_config_dir
 
 echo -e "\n${BOLD_GREEN}All done! You may now restart your computer.${NC}"
