@@ -97,7 +97,7 @@ setup_config_dir() {
     for config in "$SOURCE_CONFIG_DIR"/*; do
         # We do not override the entire ags folder because it contains auto-generated code.
         if "$(basename "$config")" != "ags"; then
-            cp -rf "$config" "$CONFIG_DIR/"
+            cp -rf "$config" "$CONFIG_DIR/";
         fi
     done
 }
