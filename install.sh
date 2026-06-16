@@ -6,10 +6,10 @@ BOLD_YELLOW="\e[1;33m"
 BOLD_GREEN="\e[1;32m"
 BOLD_RED="\e[1;31m"
 NC="\e[0m"
-CONFIG_DIR="~/.config"
+CONFIG_DIR=~/.config
 SOURCE_CONFIG_DIR="$(pwd)/.config"
 
-if [ ! -d "$SOURCE_CONFIG_DIR" ]; then
+if ! test -d $SOURCE_CONFIG_DIR; then
     echo -e "${BOLD_RED}Could not find ${SOURCE_CONFIG_DIR}. Exiting...${NC}"
     return 1
 fi
@@ -74,20 +74,19 @@ done
 
 echo -e "${BOLD_YELLOW}Setting up ~/.config folder...${NC}"
 
-if [ ! -d "$CONFIG_DIR/ags" ]; then
+if ! test -d $CONFIG_DIR/ags; then
     echo -e "${BOLD_YELLOW}Initializing AGS...${NC}"
     ags init
 fi
+
 echo -e "${BOLD_YELLOW}Cleaning AGS directory...${NC}"
-find "$CONFIG_DIR/ags" -mindepth 1 \
-    ! -name "app.ts" \
-    ! -name "env.d.ts" \
-    ! -name ".gitignore" \
-    ! -name "package.json" \
-    ! -name "style.css" \
-    ! -name "tsconfig.json" \
-    ! -name "widget/" \
-    -exec rm -rf {} +
+rm -rf $CONFIG_DIR/ags/app.ts
+rm -rf $CONFIG_DIR/ags/env.d.ts
+rm -rf $CONFIG_DIR/ags/.gitignore
+rm -rf $CONFIG_DIR/ags/package.json
+rm -rf $CONFIG_DIR/ags/style.css
+rm -rf $CONFIG_DIR/ags/tsconfig.json
+rm -rf $CONFIG_DIR/ags/widget/
 
 echo -e "${BOLD_YELLOW}Updating AGS configuration...${NC}"
 cp -rf "$SOURCE_CONFIG_DIR/ags/"* "$CONFIG_DIR/ags/"
