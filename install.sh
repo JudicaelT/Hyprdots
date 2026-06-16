@@ -96,11 +96,12 @@ setup_config_dir() {
     cp -rf "$SOURCE_CONFIG_DIR/ags/"* "$CONFIG_DIR/ags/"
     for config in "$SOURCE_CONFIG_DIR"/*; do
         # We do not override the entire ags folder because it contains auto-generated code.
-        if "$(basename "$config")" != "ags"; then
+        if [[ "$(basename "$config")" != "ags" ]]; then
             cp -rf "$config" "$CONFIG_DIR/";
         fi
     done
 }
 setup_config_dir
 
-echo -e "\n${BOLD_GREEN}All done! You may now restart your computer.${NC}"
+echo
+echo -e "${BOLD_GREEN}All done! You may now restart your computer.${NC}"
