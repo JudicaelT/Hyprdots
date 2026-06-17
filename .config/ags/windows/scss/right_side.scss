@@ -1,0 +1,8 @@
+@use "widgets/time/scss/time.scss";
+
+window.RightSideWindow {
+  >box {
+    margin-top: 100px;
+    margin-right: 150px;
+  }
+}

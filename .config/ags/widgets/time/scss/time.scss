@@ -1,0 +1,14 @@
+.Time {
+  $text-color: #202020;
+  font-family: Nelphim;
+  color: $text-color;
+
+  .time {
+    font-size: 175px;
+  }
+
+  .date {
+    margin-top: -10px;
+    font-size: 40px;
+  }
+}

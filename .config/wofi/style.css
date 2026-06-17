@@ -1,0 +1,59 @@
+@define-color primary #27272d;
+@define-color text #dddddd;
+@define-color base #202020;
+
+* {
+    font-family: 'JetbrainsMono Nerd Font', monospace;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+window {
+    margin: 0px;
+    border: 2px solid #272727;
+    border-radius: 20px;
+    background-color: @base;
+}
+
+#outer-box {
+    margin: 5px;
+    border: none;
+    background-color: @base;
+}
+
+#input {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    margin-bottom: 10px;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border: none;
+    border-bottom: 2px solid @primary;
+    border-radius: 0;
+    color: @text;
+    background-color: @base;
+}
+
+#input image {
+    color: @text;
+}
+
+#text {
+    margin: 5px;
+    border: none;
+    color: @text;
+}
+
+#entry {
+    margin-left: 25px;
+    margin-right: 25px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 20px;
+}
+
+#entry:selected {
+    background-color: @primary;
+    border: 0.11em solid @primary;
+}

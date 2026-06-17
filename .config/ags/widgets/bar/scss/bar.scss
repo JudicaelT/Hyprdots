@@ -1,0 +1,87 @@
+window.BarWindow {
+  $fg-color: #dddddd;
+  $bg-color: #202020;
+  $button-inactive-background: #000000;
+  $button-active-background: #efb879;
+
+  .Bar {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-weight: bold;
+    font-family: JetbrainsMono Nerd Font;
+    font-size: 17px;
+    color: $fg-color;
+    background: $bg-color;
+  }
+
+  .bar-corners {
+    padding-top: 25px;
+    border-radius: 0px 0px 30px 30px;
+    box-shadow: 35px 0px $bg-color, -35px 0px $bg-color;
+  }
+
+  button {
+    color: $fg-color;
+    box-shadow: none;
+    text-shadow: none;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .Monitoring,
+  .Settings,
+  .ToolBox {
+    label {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    button {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    :first-child {
+      margin-left: 0;
+    }
+
+    :last-child {
+      margin-right: 0;
+    }
+  }
+
+  .ToolBox {
+    label {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    button {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    :first-child {
+      margin-left: 0;
+    }
+
+    :last-child {
+      margin-right: 0;
+    }
+  }
+
+  .Separator {
+    background: #777777;
+    padding-right: 2px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .Settings label {
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+}

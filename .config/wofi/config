@@ -1,0 +1,6 @@
+[global]
+width = 600
+height = 700
+allow_images=true
+image_size=40
+no_actions=true

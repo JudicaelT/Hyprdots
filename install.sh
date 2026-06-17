@@ -1,0 +1,132 @@
+#!/bin/bash
+
+set -e
+
+BOLD_YELLOW="\e[1;33m"
+BOLD_GREEN="\e[1;32m"
+BOLD_RED="\e[1;31m"
+NC="\e[0m"
+
+CONFIG_DIR=~/.config
+HYPRDOTS_CONFIG_DIR=.config
+FONT_DIR=~/.local/share/fonts
+
+PACKAGES=(
+    aylurs-gtk-shell
+    htop
+    hyprland
+    hyprlock
+    hyprpaper
+    hyprpicker
+    hyprshot
+    kitty
+    lazydocker
+    lazygit
+    libastal-meta
+    nautilus
+    neofetch
+    neovim
+    nodejs
+    npm
+    ripgrep
+    sass
+    starship
+    tree-sitter-cli
+    wofi
+    zoxide
+)
+
+if ! test -d $HYPRDOTS_CONFIG_DIR; then
+    echo -e "${BOLD_RED}Could not find ${HYPRDOTS_CONFIG_DIR}. Exiting...${NC}"
+    exit 1
+fi
+
+print_welcome() {
+    echo -e "${BOLD_YELLOW}"
+    echo "╔════════════════════════════════════════════════════════╗"
+    echo "║                                                        ║"
+    echo "║                Arch Hyprdots installer                 ║"
+    echo "║                                                        ║"
+    echo "╠════════════════════════════════════════════════════════╣"
+    echo "║  The following packages will be installed:             ║"
+
+    for package in "${PACKAGES[@]}"; do
+        printf "║   - %-50s ║\n" "$package"
+    done
+
+    echo "╚════════════════════════════════════════════════════════╝"
+    echo -e "${NC}"
+
+    read -rp "Continue? [y/N]: " confirm
+
+    case "$confirm" in [yY]|[yY][eE][sS])
+            echo -e "${BOLD_GREEN}Starting installation...${NC}"
+            echo
+            ;;
+        *)
+            echo -e "${BOLD_RED}Installation cancelled.${NC}"
+            exit 0
+            ;;
+    esac
+}
+print_welcome
+
+install_packages() {
+    for package in "${PACKAGES[@]}"; do
+        echo -e "${BOLD_YELLOW}Installing ${package}...${NC}"
+
+        if yay -S --noconfirm "$package"; then
+            echo -e "${BOLD_GREEN}✓ ${package} installed${NC}"
+        else
+            echo -e "${BOLD_RED}✗ Failed to install ${package}${NC}"
+            exit 1
+        fi
+    done
+}
+install_packages
+
+copy_dotfiles() {
+    if ! test -d $CONFIG_DIR/ags; then
+        echo -e "${BOLD_YELLOW}Initializing AGS...${NC}"
+        ags init
+        echo
+    fi
+    echo -e "${BOLD_YELLOW}Copying dotfiles...${NC}"
+    rm -rf $CONFIG_DIR/ags/app.ts
+    rm -rf $CONFIG_DIR/ags/env.d.ts
+    rm -rf $CONFIG_DIR/ags/.gitignore
+    rm -rf $CONFIG_DIR/ags/package.json
+    rm -rf $CONFIG_DIR/ags/style.css
+    rm -rf $CONFIG_DIR/ags/tsconfig.json
+    rm -rf $CONFIG_DIR/ags/widget/
+    cp -rf "$HYPRDOTS_CONFIG_DIR/ags/"* "$CONFIG_DIR/ags/"
+    for config in "$HYPRDOTS_CONFIG_DIR"/*; do
+        # We do not override the entire ags folder because it contains auto-generated code.
+        if [[ "$(basename "$config")" != "ags" ]]; then
+            cp -rf "$config" "$CONFIG_DIR/";
+        fi
+    done
+    cp .bashrc ~/
+}
+copy_dotfiles
+
+install_fonts() {
+    echo -e "${BOLD_YELLOW}Installing fonts...${NC}"
+    mkdir -p $FONT_DIR
+
+    curl -L \
+        https://github.com/JudicaelT/Hyprdots/raw/refs/heads/main/.local/share/fonts/JetBrainsMono.zip?download= \
+        -o $FONT_DIR/JetBrainsMono.zip
+    unzip -qo $FONT_DIR/JetBrainsMono.zip -d $FONT_DIR/JetBrainsMono
+    rm -rf $FONT_DIR/JetBrainsMono.zip
+
+    curl -L \
+        https://github.com/JudicaelT/Hyprdots/raw/refs/heads/main/.local/share/fonts/Nelphim-Font.zip?download= \
+        -o $FONT_DIR/Nelphim-Font.zip
+    unzip -qo $FONT_DIR/Nelphim-Font.zip -d $FONT_DIR/Nelphim-Font
+    rm -rf $FONT_DIR/Nelphim-Font.zip
+}
+install_fonts
+
+echo
+echo -e "${BOLD_GREEN}All done! You may now restart your computer.${NC}"
