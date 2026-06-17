@@ -15,7 +15,7 @@ alias c='clear'
 alias v='nvim'
 alias lg='lazygit'
 alias ld='lazydocker'
-alias supdate='sudo pacman -Syu'
+alias supdate='sudo dnf upgrade --refresh'
 
 # Use colors to make ls a little easier to read
 alias ls='ls --color=auto'
