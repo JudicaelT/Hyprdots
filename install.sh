@@ -36,7 +36,7 @@ if ! test -d $SOURCE_CONFIG_DIR; then
     exit 1
 fi
 
-print_recap() {
+print_welcome() {
     echo -e "${BOLD_YELLOW}"
     echo "╔════════════════════════════════════════════════════════╗"
     echo "║                                                        ║"
@@ -64,13 +64,13 @@ print_recap() {
             ;;
     esac
 }
-print_recap
+print_welcome
 
 install_packages() {
     for package in "${PACKAGES[@]}"; do
         echo -e "${BOLD_YELLOW}Installing ${package}...${NC}"
 
-        if yay -S --noconfirm --needed "$package"; then
+        if yay -S --noconfirm "$package"; then
             echo -e "${BOLD_GREEN}✓ ${package} installed${NC}"
         else
             echo -e "${BOLD_RED}✗ Failed to install ${package}${NC}"
