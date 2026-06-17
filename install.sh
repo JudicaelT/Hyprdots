@@ -11,8 +11,14 @@ CONFIG_DIR=~/.config
 HYPRDOTS_CONFIG_DIR=.config
 FONT_DIR=~/.local/share/fonts
 
-PACKAGES=(
-    aylurs-gtk-shell
+DNF_PACKAGES=(
+    fastfetch
+    gobject-introspection-devel
+    golang
+    gtk3-devel
+    gtk4-devel
+    gtk-layer-shell-devel
+    gtk4-layer-shell-devel
     htop
     hyprland
     hyprlock
@@ -20,18 +26,19 @@ PACKAGES=(
     hyprpicker
     hyprshot
     kitty
-    lazydocker
     lazygit
-    libastal-meta
+    meson
     nautilus
-    neofetch
     neovim
+    ninja
     nodejs
     npm
     ripgrep
-    sass
-    starship
+    sassc
     tree-sitter-cli
+    vala
+    valadoc
+    wayland-protocols-devel
     wofi
     zoxide
 )
@@ -50,7 +57,7 @@ print_welcome() {
     echo "╠════════════════════════════════════════════════════════╣"
     echo "║  The following packages will be installed:             ║"
 
-    for package in "${PACKAGES[@]}"; do
+    for package in "${DNF_PACKAGES[@]}"; do
         printf "║   - %-50s ║\n" "$package"
     done
 
@@ -72,8 +79,13 @@ print_welcome() {
 print_welcome
 
 install_packages() {
-    for package in "${PACKAGES[@]}"; do
-        echo -e "${BOLD_YELLOW}Installing ${package}...${NC}"
+    sudo dnf copr enable -y lionheartp/Hyprland
+    sudo dnf copr enable -y dejan/lazygit
+
+    echo -e "${BOLD_YELLOW}Installing starship...${NC}"
+    curl -sS https://starship.rs/install.sh | sh
+    for package in "${DNF_PACKAGES[@]}"; do
+        echo -e "${BOLD_YELLOW}Installing dnf ${package}...${NC}"
 
         if sudo dnf install -y "$package"; then
             echo -e "${BOLD_GREEN}✓ ${package} installed${NC}"
@@ -82,6 +94,26 @@ install_packages() {
             exit 1
         fi
     done
+
+    echo -e "${BOLD_YELLOW}Installing lazydocker...${NC}"
+    go install github.com/jesseduffield/lazydocker@latest
+
+    echo -e "${BOLD_YELLOW}Installing aylurs-gtk-shell...${NC}"
+    local TMP_DIR
+    TMP_DIR=$(mktemp -d)
+
+    git clone https://github.com/aylur/astal.git "$TMP_DIR/astal"
+    meson setup "$TMP_DIR/astal/lib/astal/io/build" "$TMP_DIR/astal/lib/astal/io"
+    meson install -C "$TMP_DIR/astal/lib/astal/io/build"
+    meson setup "$TMP_DIR/astal/lib/astal/gtk3/build" "$TMP_DIR/astal/lib/astal/gtk3"
+    meson install -C "$TMP_DIR/astal/lib/astal/gtk3/build"
+    meson setup "$TMP_DIR/astal/lib/astal/gtk4/build" "$TMP_DIR/astal/lib/astal/gtk4"
+    meson install -C "$TMP_DIR/astal/lib/astal/gtk4/build"
+
+    git clone https://github.com/aylur/ags.git "$TMP_DIR/ags"
+    npm install --prefix "$TMP_DIR/ags"
+    meson setup "$TMP_DIR/ags/build" "$TMP_DIR/ags"
+    meson install -C "$TMP_DIR/ags/build"
 }
 install_packages
 
