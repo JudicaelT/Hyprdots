@@ -45,7 +45,7 @@ print_welcome() {
     echo -e "${BOLD_YELLOW}"
     echo "╔════════════════════════════════════════════════════════╗"
     echo "║                                                        ║"
-    echo "║                Arch Hyprdots installer                 ║"
+    echo "║                Fedora Hyprdots installer               ║"
     echo "║                                                        ║"
     echo "╠════════════════════════════════════════════════════════╣"
     echo "║  The following packages will be installed:             ║"
@@ -75,7 +75,7 @@ install_packages() {
     for package in "${PACKAGES[@]}"; do
         echo -e "${BOLD_YELLOW}Installing ${package}...${NC}"
 
-        if yay -S --noconfirm "$package"; then
+        if sudo dnf install -y "$package"; then
             echo -e "${BOLD_GREEN}✓ ${package} installed${NC}"
         else
             echo -e "${BOLD_RED}✗ Failed to install ${package}${NC}"
