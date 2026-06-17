@@ -34,6 +34,7 @@ DNF_PACKAGES=(
     nodejs
     npm
     ripgrep
+    sass
     sassc
     tree-sitter-cli
     vala
