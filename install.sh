@@ -120,7 +120,14 @@ install_packages
 copy_dotfiles() {
     if ! test -d $CONFIG_DIR/ags; then
         echo -e "${BOLD_YELLOW}Initializing AGS...${NC}"
-        ags init
+        # 'ags init' fails for some reason, so we have to run this
+        /usr/bin/npx -y @ts-for-gir/cli generate * \
+            --ignoreVersionConflicts \
+            --outdir /home/judi/.config/ags/@girs \
+            -g /usr/local/share/gir-1.0 \
+            -g /usr/share/gir-1.0 \
+            -g /usr/share/*/gir-1.0 \
+            -g
         echo
     fi
     echo -e "${BOLD_YELLOW}Copying dotfiles...${NC}"
