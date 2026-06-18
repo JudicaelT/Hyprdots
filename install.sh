@@ -83,8 +83,6 @@ install_packages() {
     sudo dnf copr enable -y lionheartp/Hyprland
     sudo dnf copr enable -y dejan/lazygit
 
-    sudo npm install -g sass
-
     echo -e "${BOLD_YELLOW}Installing starship...${NC}"
     curl -sS https://starship.rs/install.sh | sh
     for package in "${DNF_PACKAGES[@]}"; do
@@ -97,6 +95,9 @@ install_packages() {
             exit 1
         fi
     done
+
+    echo -e "${BOLD_YELLOW}Installing sass...${NC}"
+    sudo npm install -g sass
 
     echo -e "${BOLD_YELLOW}Installing lazydocker...${NC}"
     go install github.com/jesseduffield/lazydocker@latest
