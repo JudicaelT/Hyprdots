@@ -10,12 +10,17 @@ eval "$(starship init bash)"
 # Init zoxide
 eval "$(zoxide init bash)"
 
+# Setting GI_TYPELIB_PATH and LD_LIBRARY_PATH because the ags build script does not set them properly
+export GI_TYPELIB_PATH=/usr/local/lib64/girepository-1.0:/usr/local/lib/girepository-1.0:$GI_TYPELIB_PATH
+export LD_LIBRARY_PATH=/usr/local/lib64:/usr/local/lib:$LD_LIBRARY_PATH
+
 # Aliases
 alias c='clear'
 alias v='nvim'
 alias lg='lazygit'
 alias ld='lazydocker'
 alias supdate='sudo dnf upgrade --refresh'
+alias neofetch='fastfetch'
 
 # Use colors to make ls a little easier to read
 alias ls='ls --color=auto'

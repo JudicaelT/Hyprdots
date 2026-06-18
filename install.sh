@@ -26,6 +26,7 @@ DNF_PACKAGES=(
     hyprpaper
     hyprpicker
     hyprshot
+    json-glib-devel
     kitty
     lazygit
     meson
@@ -35,8 +36,6 @@ DNF_PACKAGES=(
     nodejs
     npm
     ripgrep
-    sass
-    sassc
     tree-sitter-cli
     vala
     valadoc
@@ -84,6 +83,8 @@ install_packages() {
     sudo dnf copr enable -y lionheartp/Hyprland
     sudo dnf copr enable -y dejan/lazygit
 
+    sudo npm install -g sass
+
     echo -e "${BOLD_YELLOW}Installing starship...${NC}"
     curl -sS https://starship.rs/install.sh | sh
     for package in "${DNF_PACKAGES[@]}"; do
@@ -111,6 +112,8 @@ install_packages() {
     meson install -C "$TMP_DIR/astal/lib/astal/gtk3/build"
     meson setup "$TMP_DIR/astal/lib/astal/gtk4/build" "$TMP_DIR/astal/lib/astal/gtk4"
     meson install -C "$TMP_DIR/astal/lib/astal/gtk4/build"
+    meson setup "$TMP_DIR/astal/lib/hyprland/build" "$TMP_DIR/astal/lib/hyprland"
+    meson install -C "$TMP_DIR/astal/lib/hyprland/build"
 
     git clone https://github.com/aylur/ags.git "$TMP_DIR/ags"
     npm install --prefix "$TMP_DIR/ags"
