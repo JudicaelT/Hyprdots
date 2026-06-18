@@ -21,6 +21,7 @@ DNF_PACKAGES=(
     gtk4-layer-shell-devel
     htop
     hyprland
+    hyprland-guiutils
     hyprlock
     hyprpaper
     hyprpicker
