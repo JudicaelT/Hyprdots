@@ -7,12 +7,20 @@
 
 > [!IMPORTANT]
 > This branch contains the configurations and install scripts for arch-based distros.
-> To install this configuration on Fedora, please check [the Fedora branch](https://github.com/JudicaelT/Hyprdots/tree/fedora)
+> To install them on Fedora, please check [the Fedora branch](https://github.com/JudicaelT/Hyprdots/tree/fedora)
 >
-> Also, the install script uses **yay** to install the dependencies and **curl** to fetch the fonts.
-> **Make sure those are installed before proceding**.
+> These configurations have also been made with a **french AZERTY** keyboard in mind.
+> Therefore, the experience might not be suitable for non-AZERTY keyboard users.
+> We strongly recommend you edit the configuration files (once you've pulled them) to suit your needs.
+
+> [!CAUTION]
+> The install script will override the existing configs in ~/config.
+> If you don't want to lose your custom configurations, make sure to back them up before running ./install.sh
 
 ```shell
+# The install script uses yay to install the packages and curl to fetch the fonts.
+# Make sure those are installed before proceding.
+
 git clone --recurse-submodules https://github.com/JudicaelT/Hyprdots.git
 cd Hyprdots
 chmod +x install.sh
