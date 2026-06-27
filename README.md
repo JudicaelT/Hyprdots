@@ -19,7 +19,7 @@
 
 ```shell
 # The install script uses yay to install the packages and curl to fetch the fonts.
-# Make sure those are installed before proceding.
+# Make sure those are installed before proceeding.
 
 git clone --recurse-submodules https://github.com/JudicaelT/Hyprdots.git
 cd Hyprdots
