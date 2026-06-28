@@ -6,8 +6,8 @@
 ## Installation
 
 > [!IMPORTANT]
-> This branch contains the configurations and install scripts for arch-based distros.
-> To install them on Fedora, please check [the Fedora branch](https://github.com/JudicaelT/Hyprdots/tree/fedora)
+> This branch contains the configurations and install scripts for Fedora.
+> To install them on an arch-based distro, please check [the main branch](https://github.com/JudicaelT/Hyprdots/tree/main)
 >
 > These configurations have also been made with a **french AZERTY** keyboard in mind.
 > Therefore, the experience might not be suitable for non-AZERTY keyboard users.
@@ -18,8 +18,8 @@
 > If you don't want to lose your custom configurations, make sure to back them up before running ./install.sh
 
 ```shell
-# The install script uses yay to install the packages and curl to fetch the fonts.
-# Make sure those are installed before proceeding.
+# The install script curl to fetch the fonts.
+# Make sure curl is installed before proceeding.
 
 git clone --recurse-submodules https://github.com/JudicaelT/Hyprdots.git
 cd Hyprdots
@@ -38,20 +38,30 @@ chmod +x install.sh
 - wofi
 
 ### Other packages
+- fastfetch
+- gobject-introspection-devel
+- golang
+- gtk3-devel
+- gtk4-devel
+- gtk-layer-shell-devel
+- gtk4-layer-shell-devel
+- htop
+- hyprland-guiutils
 - hyprlock
 - hyprpaper
 - hyprpicker
 - hyprshot
-- htop
-- lazydocker
+- json-glib-devel
 - lazygit
-- libastal-meta
+- meson
 - nautilus
-- neofetch
 - neovim
+- ninja
 - nodejs
 - npm
 - ripgrep
-- sass
 - tree-sitter-cli
+- vala
+- valadoc
+- wayland-protocols-devel
 - zoxide
