@@ -14,7 +14,7 @@
 > We strongly recommend you edit the configuration files (once you've pulled them) to suit your needs.
 
 > [!CAUTION]
-> The install script will override the existing configs in ~/config.
+> The install script will override the existing configs in ~/.config.
 > If you don't want to lose your custom configurations, make sure to back them up before running ./install.sh
 
 ```shell
